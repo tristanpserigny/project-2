@@ -30,16 +30,18 @@ Shark Data - shows where individual sharks stand in relation to a variety of dif
 Map that displays the locations of the company/product operating headquarters/origins. This map will include tabs for each company and display the company name and info based on user mouse interaction. 
 Heat Map Pitch Value Data - what kind of pitches are the most successful, large asks? Small asks? Large stake offers? Small stake offers? 
 
-![alt-text][map]
+![alt-text](map)
+
 ### Tableau
 
-![alt-text][pie] 
+![alt-text](bar) 
 
 ### Plotly
 
 Industry Pie Data - All, Success, Failure, other factors?!
 
-![alt-text][pie]
+![alt-text](pie)
+
 Histograms
 
 ## Other chart ideas
@@ -57,5 +59,7 @@ Lowest, Highest, Average
 Filters: Location, Industry, Year Presented, 
 
 [map]: https://mapline.com/wp-content/uploads/radial-heat-map-500x333.jpg “Map Example”
+
 [pie]: https://assets.visme.co/templates/infographics/fullsize/i_Most-Frequently-Used-Visuals-Pie-Chart_full.jpg “Pie Example”
+
 [bar]: https://www.theinformationlab.ie/wp-content/uploads/2019/04/9-1.png “Bar Example”
