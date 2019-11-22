@@ -1,0 +1,105 @@
+/* giving the body a dark background to better see the bright colored boxes */
+.logo-text {
+    font-size: 16pt;
+}
+
+.back-box {
+  margin: 10pt;
+  margin-top:0pt;
+  padding: 15pt;
+  background-color:white;
+}
+
+.comp-box {
+  margin: 10pt;
+  margin-bottom: 0pt;
+  padding: 15pt;
+  background-color:white;
+  margin-top: 0pt;
+}
+
+.display-img {
+  float: left;
+  max-width:50%;
+  height:auto;
+  
+}
+
+.right-img {
+  max-width:49%;
+  height:auto;
+  
+}
+
+.comp-img {
+  max-width:100%;
+  height:auto;
+  
+}
+
+.main-text {
+  line-height: 1.8;
+  text-indent: 50px;
+  
+}
+  
+.img-border {
+  border: 1pt solid black;
+}
+
+.left-box {
+  margin-right: 25pt;
+}
+
+.right-box {
+  margin-left: 25pt;
+}
+
+.left-comp {
+  margin-right: 0pt;
+}
+
+.right-comp {
+  margin-left: 0pt;
+}
+
+.title {
+  font-weight: 600;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color:#343a40!important;
+}
+
+.subtitle {
+  font-weight: 600;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #343a40!important;
+}
+
+.backcolor {
+  background-color:lightblue;
+}
+
+/* Here we define some styles that will ONLY be applied at screen sizes below 480 pixels */
+@media (max-width: 995px) {
+
+.left-box {
+  margin: 10pt;
+}
+  
+.right-box {
+  margin: 10pt;
+}
+
+.left-comp {
+  margin: 10pt;
+  margin-bottom: 0pt;
+  margin-top: 0pt;
+}
+
+.right-comp {
+  margin: 10pt;
+  margin-bottom: 0pt;
+  margin-top: 0pt;
+}
+
+}
