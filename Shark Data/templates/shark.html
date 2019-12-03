@@ -11,7 +11,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="C:\Users\steve\Desktop\DataViz\UTCampHW\project-2\Shark Data\static\css\style.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="//rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
+
+
 
 </head>
 <body class="backcolor">
@@ -24,15 +28,16 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">     
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="shark.html">Shark Data</a>
+
+                    <a class="nav-link" href="{{ url_for('sharkpage') }}">Shark Data</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="pitch.html">Pitch Data</a>
+                    <a class="nav-link" href="">Pitch Data</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="loc.html">Location Data</a>
+                    <a class="nav-link" href="">Location Data</a>
                 </li>
 
                 <li class="nav-item">
@@ -47,6 +52,74 @@
                 <div class="col-lg back-box left-box">
                     <h1 class="title">The Sharks</h1>
                     <hr>
+
+                        <div class="row" id="shell">
+                            <div>
+                                <div id="scatter"></div>
+                            </div>
+                            
+                        </div>
+                    <br>
+                    <hr>
+                
+                    <h1 class="title">Filters:</h1>
+                        <div class="row">
+                            <div class="col-lg back-box left-box">
+                            
+                            <div class="form-row row-space">
+                                    <div class="form-group col-md-2">
+                                    <h2>Enter Range:  </h2>
+                                    </div>
+                                    <div class="form-group col-md-1">
+                                      <input type="low" class="form-control" id="low" placeholder="Low">
+                                    </div>
+                                    <div class="form-group col-md-1">
+                                      <input type="high" class="form-control" id="high" placeholder="High">
+                                    </div>
+                                     <br><br>
+                            </div>
+
+                            <div class="form-row row-space">
+                                <div class="form-group col-md-2">
+                                        <h2>Select One:  </h2>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                        <button id="made" type="button" data-toggle="button" aria-pressed="false" class="btn btn-lg btn-primary btn-space active" enabled>Deals Made</button>
+                                        <button id="rejected" type="button" data-toggle="button" aria-pressed="false" class="btn btn-secondary btn-lg active" enabled>Deals Rejected</button>
+                                    <!-- <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-secondary btn-space" id="made">Deals Made</button>
+                                        <button type="button" class="btn btn-secondary" id="rejected">Deals Rejected</button>
+                                    </div> -->
+                                </div>
+                                <br><br>
+                            </div>
+
+                            <div class="form-row row-space2">
+                                <div class="form-group col-md-2">
+                                    <h2 class="label-1">Select Sharks:</h2>
+                                </div>
+                                <div class="form-group col-md-10">
+                                    <img id="barb" onclick="clickImg('#barb')" class="img-space2" src="{{ url_for('static', filename='images/barb2.png')}}">
+                                    <img id="rob" onclick="clickImg('#rob')" class="img-space" src="{{ url_for('static', filename='images/rob1.png')}}">
+                                    <img id="kevin" onclick="clickImg('#kevin')" class="img-space" src="{{ url_for('static', filename='images/kevin1.png')}}">
+                                    <img id="cuban" onclick="clickImg('#cuban')" class="img-space" src="{{ url_for('static', filename='images/cuban1.png')}}">
+                                    <img id="daymond" onclick="clickImg('#daymond')" class="img-space" src="{{ url_for('static', filename='images/daymond1.png')}}">
+                                    <img id="lori" onclick="clickImg('#lori')" class="img-space" src="{{ url_for('static', filename='images/lori1.png')}}">
+                                </div>
+                                <br><br>
+                            </div>
+
+                            <div class="form-row">
+                                    <div class="form-group col-xl-2">
+                                        <button id="apply" type="button" class="btn btn-lg btn-primary btn-space" enabled>Apply Filters</button>
+                                    </div>
+                                    <br><br>
+                            </div>
+                        </div>
+
+                    </div>
+
                     
                 </div>
             </div>
@@ -54,9 +127,9 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="{{ url_for('static', filename='js/bonus.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+    <script src="{{ url_for('static', filename='js/shark.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/events.js') }}"></script>
 
 </body>
 </html>

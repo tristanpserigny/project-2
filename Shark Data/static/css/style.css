@@ -1,17 +1,17 @@
 /* giving the body a dark background to better see the bright colored boxes */
-body {
-  padding: 0;
-  margin: 0;
-}
-#map,
-body,
-html {
-  height: 100%;
-}
-
 
 .logo-text {
     font-size: 16pt;
+}
+
+
+.tooltip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
 }
 
 .back-box {
@@ -90,6 +90,97 @@ html {
   background-color:lightblue;
 }
 
+.active {
+  font-weight: bold;
+  fill: #000;
+  transition: fill 0.3s ease-out;
+  text-anchor: middle;
+}
+
+.inactive {
+  font-weight: lighter;
+  fill: #c9c9c9;
+  transition: fill 0.3s ease-out;
+  text-anchor: middle;
+}
+
+.btn-space {
+  margin-right: 10px;
+}
+
+.img-space {
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 118px;
+  cursor: pointer;
+}
+
+.img-space2 {
+  padding-right: 10px;
+  width: 108px;
+  cursor: pointer;
+}
+
+.btn-circle {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.btn-circle i {
+  position: relative;
+  top: -1px;
+}
+
+.btn-circle-sm {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  font-size: 0.9rem;
+}
+
+.btn-circle-lg {
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  font-size: 1.1rem;
+}
+
+.btn-circle-xl {
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  font-size: 1.3rem;
+}
+
+.btn-circle-xxl {
+  width: 85px;
+  height: 85px;
+  line-height: 85px;
+  font-size: 1.3rem;
+}
+
+.label-1 {
+  line-height: 88px;
+}
+
+.row-space {
+  padding-top: 35px;
+  padding-bottom: 15px;
+}
+
+.row-space2 {
+  padding-top: 20px;
+}
+
+.img-border {
+  opacity: 30%;
+  border: 0px;
+  
+}
 
 /* Here we define some styles that will ONLY be applied at screen sizes below 480 pixels */
 @media (max-width: 995px) {
