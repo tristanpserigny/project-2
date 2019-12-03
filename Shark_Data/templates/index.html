@@ -19,7 +19,7 @@
 <body class="backcolor">
 
     <nav class="navbar navbar-collapse navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 30pt;">
-            <a class="navbar-brand logo-text" href="index.html">Shark Tank Info</a>
+            <a class="navbar-brand logo-text" href="{{ url_for('index') }}">Shark Tank Info</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,15 +32,15 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="pitch.html">Pitch Data</a>
+                    <a class="nav-link" href="{{ url_for('pitchpage') }}">Pitch Data</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="loc.html">Location Data</a>
+                    <a class="nav-link" href="{{ url_for('map') }}">Location Data</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="fun.html">Fun Visuals</a>
+                    <a class="nav-link" href="{{ url_for('funpage') }}">Fun Visuals</a>
                 </li>
             </ul>
         </div>

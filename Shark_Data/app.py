@@ -114,6 +114,14 @@ def sharkpage():
 def map():
     return render_template('loc.html')
 
+@app.route('/funpage')
+def funpage():
+    return render_template('fun.html')
+
+@app.route('/pitchpage')
+def pitchpage():
+    return render_template('pitch.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
