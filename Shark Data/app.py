@@ -64,6 +64,52 @@ def pitches():
     # Return a list of the column names (sample names)
     return jsonify(data)
 
+@app.route("/sharks")
+def sharks():
+    """Return a list of sample names."""
+
+    results = db.session.query(Shark_Table).all()
+
+    data = []
+    for result in results:
+
+        if(result.Deal_Status == "Deal Made"):
+            data.append({
+                "id": result.Id,
+                "stake": result.Exchange_For_Stake,
+                "ask": result.Amount_Asked_For,
+                "valuation": result.Valuation,
+                "deal": result.Deal_Status,
+                "dealshark1": result.Deal_Shark_1,
+                "dealshark2": result.Deal_Shark_2,
+                "dealshark3": result.Deal_Shark_3,
+                "dealshark4": result.Deal_Shark_4,
+                "dealshark5": result.Deal_Shark_5
+            })
+
+        else:
+            data.append({
+                "id": result.Id,
+                "stake": result.Exchange_For_Stake,
+                "ask": result.Amount_Asked_For,
+                "valuation": result.Valuation,
+                "deal": result.Deal_Status,
+                "dealshark1": result.Shark_1,
+                "dealshark2": result.Shark_2,
+                "dealshark3": result.Shark_3,
+                "dealshark4": result.Shark_4,
+                "dealshark5": result.Shark_5
+            })
+
+    # Return a list of the column names (sample names)
+    return jsonify(data)
+
+@app.route("/sharkpage")
+def sharkpage():
+
+    return render_template("shark.html")
+
+
 # @app.route("/pitches/<pitch>")
 # def pitch_data(pitch):
 #     """Return `otu_ids`, `otu_labels`,and `sample_values`."""
@@ -83,7 +129,7 @@ def pitches():
 #         "sample_values": sample_data[sample].values.tolist(),
 #         "otu_labels": sample_data.otu_label.tolist(),
 #     }
-    return jsonify(data)
+#    return jsonify(data)
 
 # @app.route("/sharks")
 # def sharks():
@@ -170,4 +216,4 @@ def pitches():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
