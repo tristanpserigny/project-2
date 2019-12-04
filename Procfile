@@ -1,1 +1,1 @@
-web: gunicorn Shark_data.app:app
+web: gunicorn Shark_Data.app:app
