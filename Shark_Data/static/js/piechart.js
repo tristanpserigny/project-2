@@ -194,6 +194,7 @@ var data = [{
 }];
 var layout = {
     "margin": {"l": 0, "r": 0, "b": 0, "t": 0},
+    "height": 1200
   };
 Plotly.newPlot('myDiv', data, layout, {showSendToCloud: true})
 myPlot = document.getElementById("myDiv");
