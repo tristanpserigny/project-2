@@ -133,7 +133,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
         .attr("class", "tooltip")
         .offset([80, -60])
         .html(function(d) {
-            return (`${d.stake}<br>${label} ${d[chosenXAxis]}<br>${d.deal}<br>${d.dealshark1}<br>${d.dealshark2}<br>${d.dealshark3}<br>${d.dealshark4}<br>${d.dealshark5}`);
+            return (`Stake: ${d.stake}<br>${label} ${d[chosenXAxis]}<br>${d.deal}`);
         });
 
     circlesGroup.call(toolTip);
