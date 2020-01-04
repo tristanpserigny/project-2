@@ -76,7 +76,7 @@ function renderCircles(circlesGroup, newXScale, chosenXaxis, data) {
 
 
 
-    var sel = circlesGroup.data(data).exit().remove();
+    
 
     circlesGroup
     .enter()
@@ -89,10 +89,11 @@ function renderCircles(circlesGroup, newXScale, chosenXaxis, data) {
     .attr("opacity", ".5")
     .merge(circlesGroup);
     
+    circlesGroup.data(data).exit().remove();
 
   circlesGroup.transition()
     .duration(1000)
-    .attr("cx", d => newXScale(d[chosenXAxis]));
+    .attr("cx", d => newXScale(d[chosenXAxis]))
 
   return circlesGroup;
 }
@@ -270,8 +271,8 @@ function updateToolTip(chosenXAxis, circlesGroup) {
             }
         }
     
-        d3.select("#low").property("value", d3.min(sharkData, d => d[chosenXAxis]));
-        d3.select("#high").property("value", d3.max(sharkData, d => d[chosenXAxis]));
+        d3.select("#low").property("value", d3.min(sharkData2, d => d[chosenXAxis]));
+        d3.select("#high").property("value", d3.max(sharkData2, d => d[chosenXAxis]));
 
     })
 
@@ -280,7 +281,6 @@ function updateToolTip(chosenXAxis, circlesGroup) {
     
     function applyFilters() {
         d3.event.preventDefault();
-        console.log("clicked!");
         const filterParams = {};
         filterParams.low = d3.select("#low").property("value");
         filterParams.high = d3.select("#high").property("value");
@@ -304,17 +304,11 @@ function updateToolTip(chosenXAxis, circlesGroup) {
             
             sharkData2 = sharkData2.filter(function(d) {
                  return d.deal === filterParams.deal;
-                
-            })
-            // if (circlesGroup.attr("Deal") == "No Deal Made") {
-            //     circlesGroup.remove()
-            // }
-            console.log(sharkData2)
+            });
         }
 
         if (!d3.select("#made").classed("active") && d3.select("#rejected").classed("active")) {
             sharkData2 = sharkData2.filter(d => d.deal === filterParams.nodeal);
-            console.log(sharkData2)
         }
 
         var sharks = ["Barbara Corcoran", "Robert Herjavec", "Kevin O'Leary", "Mark Cuban", "Daymond John", "Lori Greiner"]
@@ -343,7 +337,6 @@ function updateToolTip(chosenXAxis, circlesGroup) {
             sharks = arrayRemove(sharks, "Lori Greiner")
         }
 
-        console.log(sharks)
         sharkData2 = sharkData2.filter(function(el) {
             return (sharks.indexOf(el.dealshark1) >= 0) ||
                 (sharks.indexOf(el.dealshark2) >= 0) ||
@@ -351,7 +344,6 @@ function updateToolTip(chosenXAxis, circlesGroup) {
                 (sharks.indexOf(el.dealshark4) >= 0) ||
                 (sharks.indexOf(el.dealshark5) >= 0);
         });
-        console.log(sharkData2)
         
         
     
