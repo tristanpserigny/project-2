@@ -11,10 +11,61 @@
     <div class="container-fluid" style="padding-left: 50pt; padding-right: 50pt;">
         <div class="row justify-content-between">
                 <div class="col-lg back-box left-box">
-                    <h1 class="title">Fun Visuals</h1>
+                    <h1 class="title">Pitch Predictor</h1>
                     <hr>
+                    <div class="form-row">
+                        <div class="form-group col-md-10">
 
-                    <h1>Coming Soon!</h1>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <div id="alert" class="alert alert-danger" role="alert" style="display:none; width:100%;">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <form name="learn" onsubmit="return validateForm()" method="post">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <input type="input" class="form-control" name="title" id="title" placeholder="Title" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <select class="form-control" id="cat" name="cat" placeholder="Category"><option value="Choose a Category">Choose a Category</option></select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <input type="number" class="form-control" id="val" name="val" placeholder="Valuation (in Dollars)" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input type="number" class="form-control" id="ask" name="ask" placeholder="Asking Amount (in Dollars)" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input type="number" class="form-control" id="stake" name="stake" placeholder="Stake Offered (Percentage)" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <textarea type="input" class="form-control" id="pitch" name="pitch" placeholder="Enter Pitch" rows="5" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <button id="predict" type="submit" class="btn btn-lg btn-primary btn-space" enabled>Predict Outcome</button>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+
+                        <div class="form-group col-md-2">
+                            <h3>Previous Entries</h3>
+                            <select class="form-control" id="userpitches" onchange="optionChanged(this.value)">
+                                <option>New Pitch</option>
+                            </select>
+                        </div>
+                    </div>
                     
                 </div>
             </div>
@@ -22,6 +73,10 @@
     </div>
     {% endblock %}
 
+    {% block endscripts %}
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    {% endblock %}
 
 </body>
 </html>
+

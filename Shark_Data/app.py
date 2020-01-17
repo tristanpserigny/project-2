@@ -29,6 +29,7 @@ Base.prepare(db.engine, reflect=True)
 
 # Save references to each table
 Shark_Table = Base.classes.Shark_Tank
+User_Table = Base.classes.User_Tank
 
 
 @app.route("/")
@@ -114,9 +115,43 @@ def sharkpage():
 def map():
     return render_template('loc.html')
 
-@app.route('/funpage')
+@app.route('/funpage', methods=['POST','GET'])
 def funpage():
     return render_template('fun.html')
+
+@app.route('/userpitches')
+def userpitches():
+    results = db.session.query(User_Table).all()
+
+    inputs = []
+    for result in results:
+        inputs.append({
+            "id": result.Id,
+            "title": result.Title,
+            "category": result.Category,
+            "ask": result.Amount_Asked_For,
+            "exchange": result.Exchange_For_Stake,
+            "valuation": result.Valuation,
+            "description": result.Description
+        })
+    return jsonify(inputs)
+
+@app.route('/userpitches/<title>')
+def specific_pitch(title):
+    results = db.session.query(User_Table).filter(User_Table.Title == title).all()
+
+    inputs = []
+    for result in results:
+        inputs.append({
+            "id": result.Id,
+            "title": result.Title,
+            "category": result.Category,
+            "ask": result.Amount_Asked_For,
+            "exchange": result.Exchange_For_Stake,
+            "valuation": result.Valuation,
+            "description": result.Description
+        })
+    return jsonify(inputs)
 
 @app.route('/pitchpage')
 def pitchpage():
