@@ -182,6 +182,28 @@
   
 }
 
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+    margin-bottom: -2.5rem; 
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.site-footer, .page-wrap:after {
+  /* .push must be the same height as footer */
+    height: 2.5rem; 
+}
+.site-footer {
+  background-color: #343a40;
+  position: fixed;
+  width: 100%;
+  color: white;
+  bottom: 0;
+  text-align: center;
+}
+
 /* Here we define some styles that will ONLY be applied at screen sizes below 480 pixels */
 @media (max-width: 995px) {
 
