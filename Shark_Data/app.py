@@ -152,12 +152,16 @@ def funpage():
             db.session.add(new)
             db.session.commit()
 
-        if (run_model("Barbara Corcoran", input_pitch, input_amount, (input_exchange / 100), input_valuation, input_gender, input_category)[0] == 0):
-            barbpred = "Sorry, I'm out!"
-        else:
-            barbpred = "You've got a deal!"
+        x, y = run_model(input_pitch, input_amount, (input_exchange / 100), input_valuation, input_gender, input_category)
         
-        return render_template('fun.html', input_title=input_title, input_pitch=input_pitch[0], input_amount=input_amount, input_exchange=input_exchange, input_valuation=input_valuation, input_gender=input_gender, input_category=input_category, barbpred=barbpred)
+        if x == 0:
+            deal_status = "Sorry, I'm out"
+            deal_shark = ""
+        else:
+            deal_status = "You've got a deal!"
+            deal_shark = y[0]
+        
+        return render_template('fun.html', input_title=input_title, input_pitch=input_pitch[0], input_amount=input_amount, input_exchange=input_exchange, input_valuation=input_valuation, input_gender=input_gender, input_category=input_category, deal_status=deal_status, deal_shark=deal_shark)
 
     return render_template('fun.html')
 

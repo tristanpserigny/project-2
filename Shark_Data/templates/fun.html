@@ -29,10 +29,7 @@
                                     <input type="input" class="form-control" name="title" id="title" placeholder="Title" value="{{ input_title }}" required>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <select class="form-control" id="cat" name="cat" placeholder="{{ input_category }}"><option value="Choose a Category">Choose a Category</option></select>
-                                    <script>
-                                        $('cat').val('{{ input_category }}')
-                                    </script>
+                                    <select class="form-control" id="cat" name="cat"><option value="Choose a Category">Choose a Category</option></select>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <select type="input" class="form-control" name="gen" id="gen" required>
@@ -81,15 +78,16 @@
 
                     <div class="row justify-content-between align-items-center">
                         <div class="col-lg-1">
-                            <img class="img-space" src="{{ url_for('static', filename='images/barb2.png')}}"></img>
+                            <h3>{{ deal_shark }}</h3>
+                            <!-- <img class="img-space" src="{{ url_for('static', filename='images/barb2.png')}}"></img>
                             <img class="img-space" src="{{ url_for('static', filename='images/rob1.png')}}"></img>
                             <img class="img-space" src="{{ url_for('static', filename='images/kevin1.png')}}"></img>
                             <img class="img-space" src="{{ url_for('static', filename='images/cuban1.png')}}"></img>
                             <img class="img-space" src="{{ url_for('static', filename='images/daymond1.png')}}"></img>
-                            <img class="img-space" src="{{ url_for('static', filename='images/lori1.png')}}"></img>
+                            <img class="img-space" src="{{ url_for('static', filename='images/lori1.png')}}"></img> -->
                         </div>
                         <div class="col-lg-10">
-                            <h3>{{ barbpred }}</h3>
+                            <h3>{{ deal_status }}</h3>
                         </div>
                     </div>
                 </div>
