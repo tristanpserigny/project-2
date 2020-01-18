@@ -16,10 +16,10 @@ def run_model(input_pitch, input_amount, input_exchange, input_valuation, input_
     dealvoc = "Deal_Status_vocab.pkl"
     sharkloc = "Deal_Shark 1_model.pkl"
     sharkvoc = "Deal_Shark 1_vocab.pkl"
-    path = os.path.join("static","py",dealloc)
-    vocpath = os.path.join("static","py",dealvoc)
-    sharkpath = os.path.join("static","py",sharkloc)
-    sharkvocpath = os.path.join("static","py",sharkvoc)
+    path = os.path.join("Shark_Data",dealloc)
+    vocpath = os.path.join("Shark_Data",dealvoc)
+    sharkpath = os.path.join("Shark_Data",sharkloc)
+    sharkvocpath = os.path.join("Shark_Data",sharkvoc)
 
     deal_model = joblib.load(path)
     shark_model = joblib.load(sharkpath)
