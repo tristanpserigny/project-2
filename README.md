@@ -7,7 +7,28 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 !["Deal Shark" Confusion Matrix](https://github.com/tristanpserigny/project-2/blob/master/Images/model_DealShark%20(3).PNG)
+
+
+
+
+
+
+
 
 
 
