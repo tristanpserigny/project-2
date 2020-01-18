@@ -8,8 +8,22 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+
+from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer
+from string import punctuation
+import nltk
+from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
+stopwords = stopwords.words( 'english' ) + list(punctuation)
+stemmer = PorterStemmer()
+import pickle
+
+import sys
+# insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, os.path.join('static','py'))
+from model import run_model
 
 app = Flask(__name__)
 
@@ -29,6 +43,7 @@ Base.prepare(db.engine, reflect=True)
 
 # Save references to each table
 Shark_Table = Base.classes.Shark_Tank
+User_Table = Base.classes.User_Tank
 
 
 @app.route("/")
@@ -114,9 +129,76 @@ def sharkpage():
 def map():
     return render_template('loc.html')
 
-@app.route('/funpage')
+@app.route('/funpage', methods=['POST','GET'])
 def funpage():
+    if request.method == 'POST':
+        result = request.form
+        print(result)
+
+        input_title = result["title"]
+        input_pitch = [result["pitch"]]
+        input_amount = int(result["ask"])
+        input_exchange = int(result["stake"])
+        input_valuation = int(result["val"])
+        input_gender = result["gen"]
+        input_category = result["cat"]
+
+        dbresults = db.session.query(User_Table.Title).all()
+        titles = [x[0] for x in dbresults]
+        print(titles)
+        
+        if input_title not in titles:
+            new = User_Table(Title=input_title, Category=input_category, Amount_Asked_For=input_amount, Exchange_For_Stake=input_exchange, Valuation=input_valuation, Description=input_pitch[0])
+            db.session.add(new)
+            db.session.commit()
+
+        x, y = run_model(input_pitch, input_amount, (input_exchange / 100), input_valuation, input_gender, input_category)
+        
+        if x == 0:
+            deal_status = "Sorry, I'm out"
+            deal_shark = ""
+        else:
+            deal_status = "You've got a deal!"
+            deal_shark = y[0]
+        
+        return render_template('fun.html', input_title=input_title, input_pitch=input_pitch[0], input_amount=input_amount, input_exchange=input_exchange, input_valuation=input_valuation, input_gender=input_gender, input_category=input_category, deal_status=deal_status, deal_shark=deal_shark)
+
     return render_template('fun.html')
+
+
+@app.route('/userpitches')
+def userpitches():
+    results = db.session.query(User_Table).all()
+
+    inputs = []
+    for result in results:
+        inputs.append({
+            "id": result.Id,
+            "title": result.Title,
+            "category": result.Category,
+            "ask": result.Amount_Asked_For,
+            "exchange": result.Exchange_For_Stake,
+            "valuation": result.Valuation,
+            "description": result.Description
+        })
+    return jsonify(inputs)
+
+@app.route('/userpitches/<title>')
+def specific_pitch(title):
+    results = db.session.query(User_Table).filter(User_Table.Title == title).all()
+
+    inputs = []
+    for result in results:
+        inputs.append({
+            "id": result.Id,
+            "title": result.Title,
+            "category": result.Category,
+            "ask": result.Amount_Asked_For,
+            "exchange": result.Exchange_For_Stake,
+            "valuation": result.Valuation,
+            "description": result.Description
+        })
+    return jsonify(inputs)
 
 @app.route('/pitchpage')
 def pitchpage():

@@ -1,66 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Shark Data</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
-</head>
-<body class="backcolor">
-
-    <nav class="navbar navbar-collapse navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 30pt;">
-            <a class="navbar-brand logo-text" href="{{ url_for('index') }}">Shark Tank Info</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">     
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-
-                    <a class="nav-link" href="{{ url_for('sharkpage') }}">Shark Data</a>
-
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('pitchpage') }}">Pitch Data</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('map') }}">Location Data</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('funpage') }}">Fun Visuals</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
+    <html lang="en">
+    {% extends "layout.html" %}
+    <head>
+        <h3>{% block title %}Shark Data{% endblock %}</h3>
+    </head>
+    
+    <body class="backcolor"><head>
+    
+    {% block content %}
     <div class="container-fluid" style="padding-left: 50pt; padding-right: 50pt;">
         <div class="row justify-content-between">
                 <div class="col-lg back-box left-box">
-                    <h1 class="title">Fun Visuals</h1>
+                    <h1 class="title">Pitch Predictor</h1>
+                    <hr>
+                    <div class="form-row">
+                        <div class="form-group col-md-10">
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <div id="alert" class="alert alert-danger" role="alert" style="display:none; width:100%;">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <form name="learn" action="/funpage" onsubmit="return validateForm()" method="post">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <input type="input" class="form-control" name="title" id="title" placeholder="Title" value="{{ input_title }}" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <select class="form-control" id="cat" name="cat"><option value="Choose a Category">Choose a Category</option></select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <select type="input" class="form-control" name="gen" id="gen" required>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Mixed">Mixed</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <input type="number" class="form-control" id="val" name="val" placeholder="Valuation (in Dollars)" value="{{ input_valuation }}" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input type="number" class="form-control" id="ask" name="ask" placeholder="Asking Amount (in Dollars)" value="{{ input_amount }}" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input type="number" class="form-control" id="stake" name="stake" placeholder="Stake Offered (Percentage)" value="{{ input_exchange }}" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <textarea type="input" class="form-control" id="pitch" name="pitch" placeholder="Enter Pitch" rows="5" value="{{ input_pitch }}" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <button id="predict" type="submit" class="btn btn-lg btn-primary btn-space" enabled>Predict Outcome</button>
+                                </div>
+                            </div>
+                        </div>
+                    
+                            <div class="form-group col-md-2">
+                                <h3>Previous Entries</h3>
+                                <select type="submit" class="form-control" id="userpitches" onchange="optionChanged(this.value)">
+                                    <option>New Pitch</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    
                     <hr>
 
-                    <h1>Coming Soon!</h1>
-                    
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-lg-1">
+                            <h3>{{ deal_shark }}</h3>
+                            <!-- <img class="img-space" src="{{ url_for('static', filename='images/barb2.png')}}"></img>
+                            <img class="img-space" src="{{ url_for('static', filename='images/rob1.png')}}"></img>
+                            <img class="img-space" src="{{ url_for('static', filename='images/kevin1.png')}}"></img>
+                            <img class="img-space" src="{{ url_for('static', filename='images/cuban1.png')}}"></img>
+                            <img class="img-space" src="{{ url_for('static', filename='images/daymond1.png')}}"></img>
+                            <img class="img-space" src="{{ url_for('static', filename='images/lori1.png')}}"></img> -->
+                        </div>
+                        <div class="col-lg-10">
+                            <h3>{{ deal_status }}</h3>
+                        </div>
+                    </div>
                 </div>
+
+                
             </div>
         
-    </div>
+        </div>
+    {% endblock %}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
+    {% block endscripts %}
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    {% endblock %}
 
 </body>
 </html>
+
