@@ -29,7 +29,12 @@
                                     <input type="input" class="form-control" name="title" id="title" placeholder="Title" value="{{ input_title }}" required>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <select class="form-control" id="cat" name="cat"><option value="Choose a Category">Choose a Category</option></select>
+                                    <select class="form-control" id="cat" name="cat">
+                                        <option value="Choose a Category">Choose a Category</option>
+                                        {% for each in cats %}
+                                            <option value="{{each}}" {% if each == input_category %} selected {% endif %}>{{each}}</option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <select type="input" class="form-control" name="gen" id="gen" required>
@@ -54,7 +59,7 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <textarea type="input" class="form-control" id="pitch" name="pitch" placeholder="Enter Pitch" rows="5" value="{{ input_pitch }}" required></textarea>
+                                    <textarea type="input" class="form-control" id="pitch" name="pitch" placeholder="Enter Pitch" rows="5" required>{{ input_pitch }}</textarea>
                                 </div>
                             </div>
 
@@ -69,6 +74,9 @@
                                 <h3>Previous Entries</h3>
                                 <select type="submit" class="form-control" id="userpitches" onchange="optionChanged(this.value)">
                                     <option>New Pitch</option>
+                                    {% for each in titles %}
+                                            <option value="{{each}}" {% if each == input_title %} selected {% endif %}>{{each}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </form>
@@ -78,13 +86,9 @@
 
                     <div class="row justify-content-between align-items-center">
                         <div class="col-lg-1">
-                            <h3>{{ deal_shark }}</h3>
-                            <!-- <img class="img-space" src="{{ url_for('static', filename='images/barb2.png')}}"></img>
-                            <img class="img-space" src="{{ url_for('static', filename='images/rob1.png')}}"></img>
-                            <img class="img-space" src="{{ url_for('static', filename='images/kevin1.png')}}"></img>
-                            <img class="img-space" src="{{ url_for('static', filename='images/cuban1.png')}}"></img>
-                            <img class="img-space" src="{{ url_for('static', filename='images/daymond1.png')}}"></img>
-                            <img class="img-space" src="{{ url_for('static', filename='images/lori1.png')}}"></img> -->
+                            {% if img == 1 %}
+                            <img id="shark" class="img-space" src="{{ url_for('static', filename='images/') }}{{ deal_shark }}"></img>
+                            {% endif %}           
                         </div>
                         <div class="col-lg-10">
                             <h3>{{ deal_status }}</h3>

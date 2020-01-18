@@ -33,37 +33,37 @@ function clearForms() {
     pitch.value = "";
 };
 
-function init() {
+// function init() {
     // Grab a reference to the dropdown select element
-    var selector = d3.select("#userpitches");
-    var cataselector = d3.select("#cat");
+    // var selector = d3.select("#userpitches");
+    // var cataselector = d3.select("#cat");
   
     // Use the list of sample names to populate the select options
-    d3.json("/userpitches").then((inputs) => {
-      inputs.forEach((input) => {
-        console.log(input.title)
-        selector
-          .append("option")
-          .text(input.title)
-          .property("value", input.title);
-      });
+    // d3.json("/userpitches").then((inputs) => {
+    //   inputs.forEach((input) => {
+    //     console.log(input.title)
+    //     selector
+    //       .append("option")
+    //       .text(input.title)
+    //       .property("value", input.title);
+    //   });
   
-      // Use the first sample from the list to build the initial plots
-    });
+    //   // Use the first sample from the list to build the initial plots
+    // });
 
-    const cats = ['Health / Wellness', 'Lifestyle / Home', 'Software / Tech',
-   'Food and Beverage', 'Business Services',
-   'Fashion / Beauty', 'Automotive', 'Media / Entertainment',
-   'Fitness / Sports / Outdoor', 'Pet Products', 'Green / Clean Tech', 
-   'Lifesytle / Home', 'Travel', 'Children / Education', 'Uncertain / Other'];
+  //   const cats = ['Health / Wellness', 'Lifestyle / Home', 'Software / Tech',
+  //  'Food and Beverage', 'Business Services',
+  //  'Fashion / Beauty', 'Automotive', 'Media / Entertainment',
+  //  'Fitness / Sports / Outdoor', 'Pet Products', 'Green / Clean Tech', 
+  //  'Lifesytle / Home', 'Travel', 'Children / Education', 'Uncertain / Other'];
 
-    cats.forEach((c) => {
-        cataselector
-        .append("option")
-        .text(c)
-        .property("value", c);
-});
-  }
+  //   cats.forEach((c) => {
+  //       cataselector
+  //       .append("option")
+  //       .text(c)
+  //       .property("value", c);
+// });
+  // }
 
   async function optionChanged(newSample) {
     // Fetch new data each time a new sample is selected
@@ -143,4 +143,4 @@ function init() {
 
   }
 
-  init();
+  // init();

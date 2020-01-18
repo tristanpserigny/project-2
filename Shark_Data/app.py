@@ -131,9 +131,14 @@ def map():
 
 @app.route('/funpage', methods=['POST','GET'])
 def funpage():
+    cats = ['Health / Wellness', 'Lifestyle / Home', 'Software / Tech','Food and Beverage', 'Business Services','Fashion / Beauty', 'Automotive', 'Media / Entertainment','Fitness / Sports / Outdoor', 'Pet Products', 'Green / Clean Tech', 'Lifesytle / Home', 'Travel', 'Children / Education', 'Uncertain / Other']
+    dbresults = db.session.query(User_Table.Title).all()
+    titles = [x[0] for x in dbresults]
+    img = 0
+
     if request.method == 'POST':
         result = request.form
-        print(result)
+        
 
         input_title = result["title"]
         input_pitch = [result["pitch"]]
@@ -143,9 +148,9 @@ def funpage():
         input_gender = result["gen"]
         input_category = result["cat"]
 
-        dbresults = db.session.query(User_Table.Title).all()
-        titles = [x[0] for x in dbresults]
-        print(titles)
+        
+        
+        
         
         if input_title not in titles:
             new = User_Table(Title=input_title, Category=input_category, Amount_Asked_For=input_amount, Exchange_For_Stake=input_exchange, Valuation=input_valuation, Description=input_pitch[0])
@@ -156,14 +161,28 @@ def funpage():
         
         if x == 0:
             deal_status = "Sorry, I'm out"
-            deal_shark = ""
+            deal_shark = "sad.png"
         else:
             deal_status = "You've got a deal!"
-            deal_shark = y[0]
+            
+            if y[0] == "Barbara Corcoran":
+                deal_shark = "barb2.png"
+            elif y[0] == "Mark Cuban":
+                deal_shark = "cuban1.png"
+            elif y[0] == "Lori Greiner":
+                deal_shark = "lori1.png"
+            elif y[0] == "Robert Herjavec":
+                deal_shark = "rob1.png"
+            elif y[0] == "Daymond John":
+                deal_shark = "daymond1.png"
+            else:
+                deal_shark = "kevin1.png"
         
-        return render_template('fun.html', input_title=input_title, input_pitch=input_pitch[0], input_amount=input_amount, input_exchange=input_exchange, input_valuation=input_valuation, input_gender=input_gender, input_category=input_category, deal_status=deal_status, deal_shark=deal_shark)
+        img = 1
+        
+        return render_template('fun.html', img=img, input_title=input_title, input_pitch=result["pitch"], input_amount=input_amount, input_exchange=input_exchange, input_valuation=input_valuation, input_gender=input_gender, input_category=input_category, deal_status=deal_status, deal_shark=deal_shark, titles=titles, cats=cats)
 
-    return render_template('fun.html')
+    return render_template('fun.html', img=img, cats=cats, titles=titles)
 
 
 @app.route('/userpitches')
