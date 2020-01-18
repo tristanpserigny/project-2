@@ -1,5 +1,20 @@
 # Project Three - Project Two Continued!
 
+
+!["Deal Status" Confusion Matrix](https://github.com/tristanpserigny/project-2/blob/master/Images/model_DealStatus%20(2).PNG)
+
+
+
+
+
+!["Deal Shark" Confusion Matrix](https://github.com/tristanpserigny/project-2/blob/master/Images/model_DealShark%20(3).PNG)
+
+
+
+
+
+
+
 ## Project Proposal
 
 Using the data from the previous project we intend to build a feature that allows a user to input a product description (or pitch) an initial valuation, an asking amount, and the stake in the business they are willing to give up. We will use a machine learning model based on previous successes and failures to determine whether the user inputted description will be successful and which shark is likely to invest.
