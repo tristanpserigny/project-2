@@ -72,6 +72,7 @@ function init() {
     } else {
     const inputdata = await d3.json("/userpitches/" + newSample)
     fillForms(inputdata[0]);
+    document.learn.submit();
     }
   }
 

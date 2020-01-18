@@ -23,31 +23,41 @@
                                 </div>
                             </div>
                             
-                            <form name="learn" onsubmit="return validateForm()" method="post">
+                            <form name="learn" action="/funpage" onsubmit="return validateForm()" method="post">
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <input type="input" class="form-control" name="title" id="title" placeholder="Title" required>
+                                <div class="form-group col-md-4">
+                                    <input type="input" class="form-control" name="title" id="title" placeholder="Title" value="{{ input_title }}" required>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <select class="form-control" id="cat" name="cat" placeholder="Category"><option value="Choose a Category">Choose a Category</option></select>
+                                <div class="form-group col-md-4">
+                                    <select class="form-control" id="cat" name="cat" placeholder="{{ input_category }}"><option value="Choose a Category">Choose a Category</option></select>
+                                    <script>
+                                        $('cat').val('{{ input_category }}')
+                                    </script>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <select type="input" class="form-control" name="gen" id="gen" required>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Mixed">Mixed</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <input type="number" class="form-control" id="val" name="val" placeholder="Valuation (in Dollars)" required>
+                                    <input type="number" class="form-control" id="val" name="val" placeholder="Valuation (in Dollars)" value="{{ input_valuation }}" required>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <input type="number" class="form-control" id="ask" name="ask" placeholder="Asking Amount (in Dollars)" required>
+                                    <input type="number" class="form-control" id="ask" name="ask" placeholder="Asking Amount (in Dollars)" value="{{ input_amount }}" required>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <input type="number" class="form-control" id="stake" name="stake" placeholder="Stake Offered (Percentage)" required>
+                                    <input type="number" class="form-control" id="stake" name="stake" placeholder="Stake Offered (Percentage)" value="{{ input_exchange }}" required>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <textarea type="input" class="form-control" id="pitch" name="pitch" placeholder="Enter Pitch" rows="5" required></textarea>
+                                    <textarea type="input" class="form-control" id="pitch" name="pitch" placeholder="Enter Pitch" rows="5" value="{{ input_pitch }}" required></textarea>
                                 </div>
                             </div>
 
@@ -57,20 +67,37 @@
                                 </div>
                             </div>
                         </div>
+                    
+                            <div class="form-group col-md-2">
+                                <h3>Previous Entries</h3>
+                                <select type="submit" class="form-control" id="userpitches" onchange="optionChanged(this.value)">
+                                    <option>New Pitch</option>
+                                </select>
+                            </div>
                         </form>
-
-                        <div class="form-group col-md-2">
-                            <h3>Previous Entries</h3>
-                            <select class="form-control" id="userpitches" onchange="optionChanged(this.value)">
-                                <option>New Pitch</option>
-                            </select>
-                        </div>
                     </div>
                     
+                    <hr>
+
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-lg-1">
+                            <img class="img-space" src="{{ url_for('static', filename='images/barb2.png')}}"></img>
+                            <img class="img-space" src="{{ url_for('static', filename='images/rob1.png')}}"></img>
+                            <img class="img-space" src="{{ url_for('static', filename='images/kevin1.png')}}"></img>
+                            <img class="img-space" src="{{ url_for('static', filename='images/cuban1.png')}}"></img>
+                            <img class="img-space" src="{{ url_for('static', filename='images/daymond1.png')}}"></img>
+                            <img class="img-space" src="{{ url_for('static', filename='images/lori1.png')}}"></img>
+                        </div>
+                        <div class="col-lg-10">
+                            <h3>{{ barbpred }}</h3>
+                        </div>
+                    </div>
                 </div>
+
+                
             </div>
         
-    </div>
+        </div>
     {% endblock %}
 
     {% block endscripts %}

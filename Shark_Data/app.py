@@ -8,8 +8,22 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+
+from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer
+from string import punctuation
+import nltk
+from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
+stopwords = stopwords.words( 'english' ) + list(punctuation)
+stemmer = PorterStemmer()
+import pickle
+
+import sys
+# insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, os.path.join('static','py'))
+from model import run_model
 
 app = Flask(__name__)
 
@@ -117,7 +131,36 @@ def map():
 
 @app.route('/funpage', methods=['POST','GET'])
 def funpage():
+    if request.method == 'POST':
+        result = request.form
+        print(result)
+
+        input_title = result["title"]
+        input_pitch = [result["pitch"]]
+        input_amount = int(result["ask"])
+        input_exchange = int(result["stake"])
+        input_valuation = int(result["val"])
+        input_gender = result["gen"]
+        input_category = result["cat"]
+
+        dbresults = db.session.query(User_Table.Title).all()
+        titles = [x[0] for x in dbresults]
+        print(titles)
+        
+        if input_title not in titles:
+            new = User_Table(Title=input_title, Category=input_category, Amount_Asked_For=input_amount, Exchange_For_Stake=input_exchange, Valuation=input_valuation, Description=input_pitch[0])
+            db.session.add(new)
+            db.session.commit()
+
+        if (run_model("Barbara Corcoran", input_pitch, input_amount, (input_exchange / 100), input_valuation, input_gender, input_category)[0] == 0):
+            barbpred = "Sorry, I'm out!"
+        else:
+            barbpred = "You've got a deal!"
+        
+        return render_template('fun.html', input_title=input_title, input_pitch=input_pitch[0], input_amount=input_amount, input_exchange=input_exchange, input_valuation=input_valuation, input_gender=input_gender, input_category=input_category, barbpred=barbpred)
+
     return render_template('fun.html')
+
 
 @app.route('/userpitches')
 def userpitches():
